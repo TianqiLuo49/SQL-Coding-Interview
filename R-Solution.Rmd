@@ -1,0 +1,31 @@
+
+/* Interview Question R Solution */
+/* Tianqi Luo */
+
+
+/* Load the tidyverse package in R studio */
+library(tidyverse)
+
+/* Left join the authors and books datasets by book_name */
+new_data = left_join(authors, books, by = c("book_name"))
+
+/* Use dplyr to pipe and edit the newly-joined data set */
+new_data %>%
+  
+  /* Group by the authors name */
+  group_by(author_name) %>% 
+
+  /* Summarize by using sum function */
+  summarize(total_copies = sum(sold_copies)) %>% 
+
+  /* Arrange the total copies in descending order */
+  arrange(desc(total_copies)) %>%
+
+  /* Use slice to pick the top 3 authors */
+  slice(1:3) ->
+
+  /* Save the results into a new dataset */
+  top_3_authors
+
+  /* Check the new dataset to see the results */
+  top_3_authors
